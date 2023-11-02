@@ -1,0 +1,32 @@
+.venv/
+.idea/
+.vscode/
+media/
+static/
+
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+__pycache__/
+pip-log.txt
+pip-delete-this-directory.txt
+
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+docs/_build/
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py

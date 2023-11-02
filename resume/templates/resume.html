@@ -1,0 +1,256 @@
+{% load static%}
+<html>
+  <style>
+    @page {
+      margin: 20mm 0 10mm 0;
+
+      size: A4;
+    }
+
+    @media print {
+      @page {
+        margin: 20mm 0 10mm 0;
+
+        size: A4;
+      }
+      .work {
+        page-break-inside: avoid;
+      } /* page-break-after works, as well */
+    }
+    @media print {
+      body {
+        padding: 16px;
+      }
+    }
+    html {
+      margin: 0;
+      padding: 0;
+      background: #f1f1f1;
+    }
+    body {
+      margin: 0;
+      width: 210mm;
+      padding: 32px;
+    }
+    .title {
+      text-transform: uppercase;
+      margin: 16px 0;
+    }
+    .works {
+      list-style: none;
+      margin: 0;
+      padding: 0 16px;
+    }
+    .skills {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 32px;
+      line-height: 20px;
+      font-size: 14px;
+      padding: 0 16px;
+    }
+    .skill {
+      display: inline-block;
+      margin: 0 2px;
+      padding: 0;
+    }
+    .skill .name {
+      margin: 0;
+    }
+    .info {
+      padding: 16px 0 16px;
+    }
+    .work {
+      padding: 16px 0px 8px;
+    }
+    .company {
+      margin: 0;
+      text-transform: uppercase;
+      padding: 0;
+      line-height: 24px;
+      font-size: 24px;
+      font-weight: 800;
+      color: #222;
+    }
+    .role {
+      font-weight: 600;
+      font-size: 18px;
+
+      line-height: 32px;
+      margin: 0;
+      padding: 0;
+      color: #444;
+    }
+    .date {
+      font-style: italic;
+      color: #777;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+    .description {
+      margin: 0;
+      padding: 8px 20px;
+    }
+    .description-item {
+      line-height: 24px;
+      font-size: 16px;
+    }
+    .work .wskills {
+      line-height: 20px;
+      font-size: 14px;
+      margin: 0;
+      text-align: justify;
+    }
+    .div {
+      margin: 0;
+    }
+    .icon {
+      width: 24px;
+      height: 24px;
+      margin: 4px;
+      padding: 0;
+      opacity: 0.9;
+    }
+    .icon-title {
+      display: flex;
+      align-items: center;
+    }
+    .icon {
+    }
+    .ititle {
+      font-weight: 700;
+      color: rgb(20, 20, 20) !important;
+    }
+    a {
+      color: rgb(20, 20, 20) !important;
+    }
+    .work:nth-child(3),
+    .work:nth-child(7) {
+      padding-top: 60px !important;
+    }
+    .row {
+      display: flex;
+      width: 100%;
+      align-items: top;
+    }
+    .main-flex {
+      flex: 1;
+    }
+  </style>
+  <body>
+    <div class="row info">
+      <div class="main-flex">
+        <h1 class="title">Reza Moslemi</h1>
+        <p class="company">Senior Software Enineer</p>
+        <p>
+          I’m a software engineer with B.Sc. degree in computer science and 10
+          years of experience in industry and startups. I have a wide domain of
+          knowledge in programming (specially web programming) and team
+          management and eager to earn more.
+        </p>
+      </div>
+      <div>
+        <div class="icon-title">
+          <img class="icon" src="{% static 'gmail.png'%}" />
+          <a class="ititle" href="mailto:rmoslemi1994@gmail.com"
+            >rmoslemi1994@gmail.com</a
+          >
+        </div>
+        <div class="icon-title">
+          <img class="icon" src="{% static 'whatsapp.png'%}" />
+          <a class="ititle" href="http://wa.me/+989350746443"
+            >Whatsapp: +98-935-074-6443</a
+          >
+        </div>
+
+        <div class="icon-title">
+          <img class="icon" src="{% static 'linkedin.png'%}" />
+          <a
+            class="ititle"
+            href="https://www.linkedin.com/in/r-moslemi-1994-se/"
+            >r-moslemi-1994-se</a
+          >
+        </div>
+        <div class="icon-title">
+          <img class="icon" src="{% static 'github.png'%}" />
+          <a class="ititle" href="https://github.com/mrmoslemi/resume"
+            >mrmoslemi</a
+          >
+        </div>
+        <div class="icon-title">
+          <img class="icon" src="{% static 'location.png'%}" />
+          <p class="ititle">Tehran, Iran</p>
+        </div>
+      </div>
+    </div>
+    <h1 class="title">Skills</h1>
+    <ul class="skills">
+      {%for skill in skills%}
+      <li class="skill">
+        <p class="name">
+          {{skill.name}}
+          <span>({{skill.duration}})</span>
+        </p>
+      </li>
+      {%endfor%}
+    </ul>
+    <h1 class="title">Working Experiences</h1>
+    <ul class="works">
+      {% for experience in experiences %}
+      <li class="work">
+        <h2 class="company">{{experience.company}}</h2>
+        <p class="role">{{experience.role}}</p>
+        <p class="date">
+          {{experience.start_date}} - {{experience.end_date}}
+          ({{experience.duration}})
+        </p>
+        <ul class="description">
+          {%for description in experience.descriptions%}
+          <li class="description-item">{{description.description}}</li>
+          {%endfor%}
+        </ul>
+        <p class="wskills">{{experience.skills}}</p>
+        {%if experience.link_set%}
+        <p class="div">
+          <b>Links</b>
+
+          {%for link in experience.link_set%}
+          <a href="{{link.url}}" class="skill">{{link.title}}</a>
+          {%endfor%}
+        </p>
+        {%endif%}
+      </li>
+      {% endfor %}
+    </ul>
+    <h1 class="title">Educations</h1>
+
+    <ul class="works">
+      {% for experience in educations %}
+      <li class="work">
+        <h2 class="company">{{experience.company}}</h2>
+        <p class="role">{{experience.role}}</p>
+        <p class="date">
+          {{experience.start_date}} - {{experience.end_date}}
+          ({{experience.duration}})
+        </p>
+        <ul class="description">
+          {%for description in experience.descriptions%}
+          <li class="description-item">{{description.description}}</li>
+          {%endfor%}
+        </ul>
+        <p class="wskills">
+          <b>Skills & Technologies:</b>
+          {{experience.skills}}
+        </p>
+        <h1 class="wskills">Links</h1>
+        <div class="div">
+          {%for link in experience.link_set%}
+          <a href="{{link.url}}" class="skill">{{link.title}}</a>
+          {%endfor%}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
